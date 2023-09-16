@@ -1,0 +1,24 @@
+mod = [
+	"tanzen"
+]
+
+package = [
+	"resource_packages/tanzen/tanzen"
+]
+
+lua = [
+	"scripts/mods/tanzen/*"
+]
+
+material = [
+  "materials/*",
+  "units/*",
+]
+
+unit = [
+  "units/*"
+]
+
+wwise_dep = [
+  "wwise/*"
+]
