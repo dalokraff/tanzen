@@ -32,23 +32,23 @@ jobs:
       
       - name: initailize steamcmd
         env:
-          USER: ${{ secrets.STEAM_USER }}
-          PWD: ${{ secrets.STEAM_PASSWORD }}
-          TOKEN: ${{ secrets.STEAM_TOKEN }}
+          STEAM_USER: ${{ secrets.STEAM_USER }}
+          STEAM_PWD: ${{ secrets.STEAM_PASSWORD }}
+          STEAM_TOKEN: ${{ secrets.STEAM_TOKEN }}
         run: |
           New-Item -ItemType "directory" -Path "$PWD/config"
-          [System.Text.Encoding]::ASCII.GetString([convert]::FromBase64String(($TOKEN))) > config/config.vdf
-          .\steamcmd +login $USER $PWD +quit || true
+          [System.Text.Encoding]::ASCII.GetString([convert]::FromBase64String(($STEAM_TOKEN))) > config/config.vdf
+          .\steamcmd +login $STEAM_USER $STEAM_PWD +quit || true
 
       - name: login steamcmd
         env:
-          USER: ${{ secrets.STEAM_USER }}
-          PWD: ${{ secrets.STEAM_PASSWORD }}
-          TOKEN: ${{ secrets.STEAM_TOKEN }}
+          STEAM_USER: ${{ secrets.STEAM_USER }}
+          STEAM_PWD: ${{ secrets.STEAM_PASSWORD }}
+          STEAM_TOKEN: ${{ secrets.STEAM_TOKEN }}
         run: |
-          [System.Text.Encoding]::ASCII.GetString([convert]::FromBase64String(($TOKEN))) > config/config.vdf
+          [System.Text.Encoding]::ASCII.GetString([convert]::FromBase64String(($STEAM_TOKEN))) > config/config.vdf
           ls
-          .\steamcmd +login $USER $PWD +quit
+          .\steamcmd +login $STEAM_USER $STEAM_PWD +quit
 
       # Downloads latest VMB release and setsup folders needed to build mods
       - name: Download VMB Release
