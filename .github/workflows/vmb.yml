@@ -34,10 +34,14 @@ jobs:
         run: |
           .\steamcmd +login anonymous +quit || true
 
-      - name: login
+      - name: login steamcmd
+        env:
+          USER: ${{ secrets.STEAM_USER }}
+          PWD: ${{ secrets.STEAM_PASSWORD }}
+          TOKEN: ${{ secrets.STEAM_TOKEN }}
         run: |
-          cd config
-          ls
+          [System.Text.Encoding]::ASCII.GetString([convert]::FromBase64String(($TOKEN))) > config_key.vdf
+          .\steamcmd +login $USER $PWD +quit
 
       # Downloads latest VMB release and setsup folders needed to build mods
       - name: Download VMB Release
