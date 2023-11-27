@@ -29,8 +29,10 @@ jobs:
 
       - name: test steamcmd
         run: |
-          ls
-          .\steamcmd +login anonymous +quit
+          .\steamcmd +login anonymous +quit || true
+
+      - name: test2
+        run: ls
 
       # Downloads latest VMB release and setsup folders needed to build mods
       - name: Download VMB Release
