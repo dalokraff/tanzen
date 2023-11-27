@@ -2,7 +2,7 @@ name: VMB build
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "steamtest" ]
   pull_request:
     branches: [ "master" ]
     
@@ -21,6 +21,16 @@ jobs:
           7z x vcredist_x64.exe -ox64 -aou          
       - name: install redist
         run: Start-Process -FilePath "x64/Setup.exe" -ArgumentList "/passive" -Wait -Passthru;
+
+      - name: install steamcmd
+        run: |
+          Invoke-WebRequest -URI https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip -Outfile steamcmd.zip
+          7z x steamcmd.zip -aou
+
+      - name: test steamcmd
+        run: |
+          ls
+          steamcmd +login anonymous +quit
 
       # Downloads latest VMB release and setsup folders needed to build mods
       - name: Download VMB Release
@@ -65,13 +75,13 @@ jobs:
       - name: Build Mod
         run: .\vmb.exe build ${{ vars.MOD_NAME }} --verbose
 
-      - name: Release
-        if: contains(fromJSON('["push"]'), github.event_name)
-        uses: softprops/action-gh-release@v1
-        with:
-          name: ${{ vars.MOD_NAME }}-${{ github.ref_name }}
-          tag_name: ${{ github.ref_name }}
-          generate_release_notes: True
-          files: |
-            mods/${{ vars.MOD_NAME }}/bundleV2/*
+      # - name: Release
+      #   if: contains(fromJSON('["push"]'), github.event_name)
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     name: ${{ vars.MOD_NAME }}-${{ github.ref_name }}
+      #     tag_name: ${{ github.ref_name }}
+      #     generate_release_notes: True
+      #     files: |
+      #       mods/${{ vars.MOD_NAME }}/bundleV2/*
       
