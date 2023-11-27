@@ -38,7 +38,7 @@ jobs:
         run: |
           New-Item -ItemType "directory" -Path "$PWD/config"
           [System.Text.Encoding]::ASCII.GetString([convert]::FromBase64String(($STEAM_TOKEN))) > config/config.vdf
-          .\steamcmd +login $STEAM_USER $STEAM_PWD +quit || true
+          .\steamcmd +login user $STEAM_PWD +quit || true
 
       - name: login steamcmd
         env:
@@ -48,7 +48,7 @@ jobs:
         run: |
           [System.Text.Encoding]::ASCII.GetString([convert]::FromBase64String(($STEAM_TOKEN))) > config/config.vdf
           ls
-          .\steamcmd +login $STEAM_USER $STEAM_PWD +quit
+          .\steamcmd +login user $STEAM_PWD +quit
 
       # Downloads latest VMB release and setsup folders needed to build mods
       - name: Download VMB Release
