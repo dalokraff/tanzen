@@ -46,9 +46,9 @@ jobs:
           STEAM_PWD: ${{ secrets.STEAM_PASSWORD }}
           STEAM_TOKEN: ${{ secrets.STEAM_TOKEN }}
         run: |
-          [System.Text.Encoding]::ASCII.GetString([convert]::FromBase64String(($STEAM_TOKEN))) > config/config.vdf
+          [System.Text.Encoding]::ASCII.GetString([convert]::FromBase64String((${{ secrets.STEAM_TOKEN }}))) > config/config.vdf
           ls
-          .\steamcmd +login "$STEAM_USER" "$STEAM_PWD" +quit
+          .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +quit
 
       # Downloads latest VMB release and setsup folders needed to build mods
       - name: Download VMB Release
