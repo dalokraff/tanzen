@@ -27,12 +27,15 @@ jobs:
           Invoke-WebRequest -URI https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip -Outfile steamcmd.zip
           7z x steamcmd.zip -aou
 
-      - name: test steamcmd
+      - name: test
+        run: ls
+      
+      - name: initailize steamcmd
         run: |
           .\steamcmd +login anonymous +quit || true
 
-      - name: test2
-        run: .\steamcmd +login anonymous +quit
+      - name: login
+        run: ls
 
       # Downloads latest VMB release and setsup folders needed to build mods
       - name: Download VMB Release
