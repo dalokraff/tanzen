@@ -37,7 +37,7 @@ jobs:
       - name: login
         run: |
           cd config
-          cd ls
+          ls
 
       # Downloads latest VMB release and setsup folders needed to build mods
       - name: Download VMB Release
