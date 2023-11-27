@@ -31,8 +31,14 @@ jobs:
         run: ls
       
       - name: initailize steamcmd
+        env:
+          USER: ${{ secrets.STEAM_USER }}
+          PWD: ${{ secrets.STEAM_PASSWORD }}
+          TOKEN: ${{ secrets.STEAM_TOKEN }}
         run: |
-          .\steamcmd +login anonymous +quit || true
+          New-Item -ItemType "directory" -Path "$PWD/config"
+          [System.Text.Encoding]::ASCII.GetString([convert]::FromBase64String(($TOKEN))) > config/config.vdf
+          .\steamcmd +login $USER $PWD +quit || true
 
       - name: login steamcmd
         env:
