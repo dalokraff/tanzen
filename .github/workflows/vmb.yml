@@ -40,7 +40,8 @@ jobs:
           PWD: ${{ secrets.STEAM_PASSWORD }}
           TOKEN: ${{ secrets.STEAM_TOKEN }}
         run: |
-          [System.Text.Encoding]::ASCII.GetString([convert]::FromBase64String(($TOKEN))) > config_key.vdf
+          [System.Text.Encoding]::ASCII.GetString([convert]::FromBase64String(($TOKEN))) > config/config.vdf
+          ls
           .\steamcmd +login $USER $PWD +quit
 
       # Downloads latest VMB release and setsup folders needed to build mods
