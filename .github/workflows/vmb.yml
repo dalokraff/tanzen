@@ -35,7 +35,9 @@ jobs:
           .\steamcmd +login anonymous +quit || true
 
       - name: login
-        run: ls
+        run: |
+          cd config
+          cd ls
 
       # Downloads latest VMB release and setsup folders needed to build mods
       - name: Download VMB Release
