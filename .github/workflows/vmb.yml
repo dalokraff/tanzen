@@ -106,7 +106,7 @@ jobs:
 
       - name: Upload Mod
         run: |
-          $ugc_path = ".\steamapps\common\Vermintide 2 SDK\ugc_uploader\ugc_tool.exe"
+          $ugc_path = ".\'steamapps\common\Vermintide 2 SDK\ugc_uploader\ugc_tool.exe'"
           $ugc_cmd = "$ugc_path -c mods/${{ vars.MOD_NAME }}/itemV2.cfg"
           Invoke-Expression $ugc_cmd
 
