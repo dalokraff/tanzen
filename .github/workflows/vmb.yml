@@ -38,7 +38,9 @@ jobs:
         run: |
           .\steamcmd +login anonymous +quit || true
           [System.Text.Encoding]::UTF8.GetString([convert]::FromBase64String(("${{ secrets.STEAM_TOKEN }}"))) > config/config.vdf
+          cd config/
           ls
+          cd ..
 
       - name: login steamcmd
         env:
@@ -48,6 +50,7 @@ jobs:
         run: |
           # [System.Text.Encoding]::UTF8.GetString([convert]::FromBase64String(("${{ secrets.STEAM_TOKEN }}"))) > config/config.vdf
           cd config/
+          [System.Text.Encoding]::UTF8.GetString([convert]::FromBase64String(("${{ secrets.STEAM_TOKEN }}"))) > config.vdf
           ls
           cd ..
           .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +quit
