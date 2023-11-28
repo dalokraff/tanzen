@@ -80,10 +80,14 @@ jobs:
 
       - name: Configure VMB
         run: |
+          $base_fallback_tools_dir2 = "$PWD\steamapps\common\Vermintide 2 SDK\"
+          $base_fallback_steamapps_dir2 = "$PWD\steamapps\"
+          $fallback_tools_dir2 = $base_fallback_tools_dir2 -replace "\\", "/"
+          $fallback_steamapps_dir2 = $base_fallback_steamapps_dir2 -replace "\\", "/"
           .\vmb.exe config
           $vmbrc = Get-Content "$PWD/.vmbrc" -raw | ConvertFrom-Json
-          $vmbrc.fallback_tools_dir2 = "$PWD\steamapps\common\Vermintide 2 SDK\"
-          $vmbrc.fallback_steamapps_dir2 = "$PWD\steamapps\"
+          $vmbrc.fallback_tools_dir2 = $fallback_tools_dir2
+          $vmbrc.fallback_steamapps_dir2 = $base_fallback_steamapps_dir2
           $vmbrc | ConvertTo-Json -depth 32| set-content "$PWD/.vmbrc"
           New-Item -ItemType Directory -Force -Path "mods/.temp"
           # New-Item -ItemType Directory -Force -Path "mods/${{ vars.MOD_NAME }}"
