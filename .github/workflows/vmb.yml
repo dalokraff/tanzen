@@ -30,13 +30,13 @@ jobs:
       - name: test
         run: ls
       
-      - name: initailize steamcmd
-        env:
-          STEAM_USER: ${{ secrets.STEAM_USER }}
-          STEAM_PWD: ${{ secrets.STEAM_PASSWORD }}
-          STEAM_TOKEN: ${{ secrets.STEAM_TOKEN }}
-        run: |
-          .\steamcmd +login anonymous +quit || true
+      # - name: initailize steamcmd
+      #   env:
+      #     STEAM_USER: ${{ secrets.STEAM_USER }}
+      #     STEAM_PWD: ${{ secrets.STEAM_PASSWORD }}
+      #     STEAM_TOKEN: ${{ secrets.STEAM_TOKEN }}
+      #   run: |
+      #     .\steamcmd +login anonymous +quit || true
 
       - name: login steamcmd
         env:
@@ -45,11 +45,17 @@ jobs:
           STEAM_TOKEN: ${{ secrets.STEAM_TOKEN }}
         run: |
           # [System.Text.Encoding]::UTF8.GetString([convert]::FromBase64String(("${{ secrets.STEAM_TOKEN }}"))) > config/config.vdf
-          cd config/
-          [System.Text.Encoding]::UTF8.GetString([convert]::FromBase64String(("${{ secrets.STEAM_TOKEN }}"))) > config.vdf
-          ls
-          cd ..
+          # cd config/
+          # [System.Text.Encoding]::UTF8.GetString([convert]::FromBase64String(("${{ secrets.STEAM_TOKEN }}"))) > config.vdf
+          # ls
+          # cd ..
           .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +quit
+
+      - name: login steamcmd
+        run: |
+          .\steamcmd force_install_dir ./V2_sdk/ +quit
+          .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +app_update 866060 validate +quit
+          ls
 
       # Downloads latest VMB release and setsup folders needed to build mods
       - name: Download VMB Release
