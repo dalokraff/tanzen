@@ -30,13 +30,9 @@ jobs:
       - name: test
         run: ls
       
-      # - name: initailize steamcmd
-      #   env:
-      #     STEAM_USER: ${{ secrets.STEAM_USER }}
-      #     STEAM_PWD: ${{ secrets.STEAM_PASSWORD }}
-      #     STEAM_TOKEN: ${{ secrets.STEAM_TOKEN }}
-      #   run: |
-      #     .\steamcmd +login anonymous +quit || true
+      - name: initailize steamcmd
+        run: |
+          .\steamcmd +login anonymous +quit || true
 
       - name: login steamcmd
         env:
