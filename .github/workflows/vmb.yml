@@ -85,6 +85,11 @@ jobs:
           $vmbrc.fallback_steamapps_dir2 = "/"
           $a | ConvertTo-Json -depth 32| set-content "$PWD/.vmbrc"
 
+      - name: Test VMB
+        run: |
+          echo "$PWD/.vmbrc"
+          ls
+
       # # get and setup VT2 SDK
       # - name: Checkout SDK
       #   uses: actions/checkout@v3
