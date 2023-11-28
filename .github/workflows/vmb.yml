@@ -85,27 +85,9 @@ jobs:
           $vmbrc.fallback_steamapps_dir2 = "/"
           $vmbrc | ConvertTo-Json -depth 32| set-content "$PWD/.vmbrc"
 
-      - name: Test VMB
-        run: |
-          echo "$PWD/.vmbrc"
-          ls
-
-      # # get and setup VT2 SDK
-      # - name: Checkout SDK
-      #   uses: actions/checkout@v3
-      #   with:
-      #     repository: ${{ vars.SDK_REPO }}
-      #     ref: ${{ vars.SDK_BRANCH }}
-      #     path: sdk
-      #     sparse-checkout: ''        
-      # - name: Extract SDK
-      #   run: 7z x sdk/VT2-SDK.zip -aou
-      # - name: Copy .vmbrc
-      #   run: |
-      #     .\vmb.exe config
-      #     Copy-Item "sdk\.vmbrc" -Destination ".vmbrc"                    
-      # - name: Check VMB
-      #   run: .\vmb.exe --version
+      # Create Mod
+      - name: Create Test
+        run: .\vmb.exe create tanzen
 
       # Builds Mod
       - name: Checkout Mod Files
