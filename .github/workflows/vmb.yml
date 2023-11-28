@@ -36,9 +36,9 @@ jobs:
           STEAM_PWD: ${{ secrets.STEAM_PASSWORD }}
           STEAM_TOKEN: ${{ secrets.STEAM_TOKEN }}
         run: |
-          New-Item -ItemType "directory" -Path "$PWD/config"
-          [System.Text.Encoding]::UTF8.GetString([convert]::FromBase64String(($STEAM_TOKEN))) > config/config.vdf
-          .\steamcmd +login "$STEAM_USER" "$STEAM_PWD" +quit || true
+          .\steamcmd +login anonymous +quit || true
+          [System.Text.Encoding]::UTF8.GetString([convert]::FromBase64String(("${{ secrets.STEAM_TOKEN }}"))) > config/config.vdf
+          ls
 
       - name: login steamcmd
         env:
@@ -46,8 +46,10 @@ jobs:
           STEAM_PWD: ${{ secrets.STEAM_PASSWORD }}
           STEAM_TOKEN: ${{ secrets.STEAM_TOKEN }}
         run: |
-          [System.Text.Encoding]::UTF8.GetString([convert]::FromBase64String(("${{ secrets.STEAM_TOKEN }}"))) > config/config.vdf
+          # [System.Text.Encoding]::UTF8.GetString([convert]::FromBase64String(("${{ secrets.STEAM_TOKEN }}"))) > config/config.vdf
+          cd config/
           ls
+          cd ..
           .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +quit
 
       # Downloads latest VMB release and setsup folders needed to build mods
