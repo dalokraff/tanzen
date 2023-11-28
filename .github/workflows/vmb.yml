@@ -51,7 +51,9 @@ jobs:
         run: |
           .\steamcmd force_install_dir ./V2_sdk/ +quit
           .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +app_update 866060 validate +quit
+          cd steamapps
           ls
+          cd ..
 
       # Downloads latest VMB release and setsup folders needed to build mods
       - name: Download VMB Release
