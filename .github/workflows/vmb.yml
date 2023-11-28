@@ -47,13 +47,16 @@ jobs:
           # cd ..
           .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +quit
 
-      - name: login steamcmd
+      - name: Download VT2 SDK
         run: |
           .\steamcmd force_install_dir ./V2_sdk/ +quit
           .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +app_update 866060 validate +quit
           cd steamapps
           cd common
+          cd "Vermintide 2 SDK"
+          echo $PWD
           ls
+          cd ..
           cd ..
           cd ..
 
