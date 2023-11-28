@@ -77,6 +77,10 @@ jobs:
           New-Item -ItemType Directory -Force -Path "workshop/content/552500/${{ vars.WORKSHOP_ID }}"
           New-Item -ItemType Directory -Force -Path "VT2-SDK"
 
+      # Create Mod
+      - name: Create Test
+        run: .\vmb.exe create tanzen
+
       - name: Configure VMB
         run: |
           .\vmb.exe config
@@ -84,10 +88,6 @@ jobs:
           $vmbrc.fallback_tools_dir2 = "$PWD/steamapps/common/Vermintide 2 SDK"
           $vmbrc.fallback_steamapps_dir2 = "/"
           $vmbrc | ConvertTo-Json -depth 32| set-content "$PWD/.vmbrc"
-
-      # Create Mod
-      - name: Create Test
-        run: .\vmb.exe create tanzen
 
       # Builds Mod
       - name: Checkout Mod Files
