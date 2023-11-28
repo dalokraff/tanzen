@@ -38,6 +38,7 @@ jobs:
         run: |
           .\steamcmd +login anonymous +quit || true
           [System.Text.Encoding]::UTF8.GetString([convert]::FromBase64String(("${{ secrets.STEAM_TOKEN }}"))) > config/config.vdf
+          Remove-Item -Path config/config.vdf -Force
           cd config/
           ls
           cd ..
@@ -53,7 +54,7 @@ jobs:
           [System.Text.Encoding]::UTF8.GetString([convert]::FromBase64String(("${{ secrets.STEAM_TOKEN }}"))) > config.vdf
           ls
           cd ..
-          .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +quit
+          # .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +quit
 
       # Downloads latest VMB release and setsup folders needed to build mods
       - name: Download VMB Release
