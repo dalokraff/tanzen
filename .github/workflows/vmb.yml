@@ -105,7 +105,10 @@ jobs:
         run: .\vmb.exe build ${{ vars.MOD_NAME }} --verbose
 
       - name: Upload Mod
-        run: .\vmb.exe upload tanzen --verbose
+        run: |
+          $ugc_path = ".\steamapps\common\Vermintide 2 SDK\ugc_uploader\ugc_tool.exe"
+          $ugc_cmd = "$ugc_path -c mods/${{ vars.MOD_NAME }}/itemV2.cfg"
+          Invoke-Expression $ugc_cmd
 
       # - name: Release
       #   if: contains(fromJSON('["push"]'), github.event_name)
