@@ -70,13 +70,13 @@ jobs:
           zipBall: true
       - name: Extract VMB
         run: 7z x vmb-1.8.2.zip -aou
-      - name: Setup Mod-Build Dirs
-        run: |
-          .\vmb.exe create tanzen
-          New-Item -ItemType Directory -Force -Path "mods/.temp"
-          # New-Item -ItemType Directory -Force -Path "mods/${{ vars.MOD_NAME }}"
-          New-Item -ItemType Directory -Force -Path "workshop/content/552500/${{ vars.WORKSHOP_ID }}"
-          New-Item -ItemType Directory -Force -Path "VT2-SDK"
+      # - name: Setup Mod-Build Dirs
+      #   run: |
+      #     .\vmb.exe create tanzen
+      #     New-Item -ItemType Directory -Force -Path "mods/.temp"
+      #     New-Item -ItemType Directory -Force -Path "mods/${{ vars.MOD_NAME }}"
+      #     New-Item -ItemType Directory -Force -Path "workshop/content/552500/${{ vars.WORKSHOP_ID }}"
+      #     New-Item -ItemType Directory -Force -Path "VT2-SDK"
 
       - name: Configure VMB
         run: |
@@ -85,6 +85,11 @@ jobs:
           $vmbrc.fallback_tools_dir2 = "$PWD/steamapps/common/Vermintide 2 SDK"
           $vmbrc.fallback_steamapps_dir2 = "/"
           $vmbrc | ConvertTo-Json -depth 32| set-content "$PWD/.vmbrc"
+          New-Item -ItemType Directory -Force -Path "mods/.temp"
+          # New-Item -ItemType Directory -Force -Path "mods/${{ vars.MOD_NAME }}"
+          New-Item -ItemType Directory -Force -Path "workshop/content/552500/${{ vars.WORKSHOP_ID }}"
+          New-Item -ItemType Directory -Force -Path "VT2-SDK"
+          .\vmb.exe create tanzen
 
       # Builds Mod
       - name: Checkout Mod Files
