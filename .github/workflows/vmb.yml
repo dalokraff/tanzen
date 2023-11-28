@@ -59,10 +59,6 @@ jobs:
           cd ..
           cd ..
           cd ..
-          
-      # Create Mod
-      - name: Create Test
-        run: .\vmb.exe create tanzen
         
       # Downloads latest VMB release and setsup folders needed to build mods
       - name: Download VMB Release
@@ -76,8 +72,9 @@ jobs:
         run: 7z x vmb-1.8.2.zip -aou
       - name: Setup Mod-Build Dirs
         run: |
+          .\vmb.exe create tanzen
           New-Item -ItemType Directory -Force -Path "mods/.temp"
-          New-Item -ItemType Directory -Force -Path "mods/${{ vars.MOD_NAME }}"
+          # New-Item -ItemType Directory -Force -Path "mods/${{ vars.MOD_NAME }}"
           New-Item -ItemType Directory -Force -Path "workshop/content/552500/${{ vars.WORKSHOP_ID }}"
           New-Item -ItemType Directory -Force -Path "VT2-SDK"
 
