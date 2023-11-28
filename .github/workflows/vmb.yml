@@ -88,7 +88,7 @@ jobs:
           $vmbrc = Get-Content "$PWD/.vmbrc" -raw | ConvertFrom-Json
           $vmbrc.fallback_tools_dir2 = $fallback_tools_dir2
           $vmbrc.fallback_steamapps_dir2 = $base_fallback_steamapps_dir2
-          $vmbrc.use_fallback = "true"
+          $vmbrc.use_fallback = $true
           $vmbrc | ConvertTo-Json -depth 32| set-content "$PWD/.vmbrc"
           New-Item -ItemType Directory -Force -Path "mods/.temp"
           # New-Item -ItemType Directory -Force -Path "mods/${{ vars.MOD_NAME }}"
