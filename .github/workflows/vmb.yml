@@ -83,7 +83,7 @@ jobs:
           $vmbrc = Get-Content "$PWD/.vmbrc" -raw | ConvertFrom-Json
           $vmbrc.fallback_tools_dir2 = "$PWD/steamapps/common/Vermintide 2 SDK"
           $vmbrc.fallback_steamapps_dir2 = "/"
-          $a | ConvertTo-Json -depth 32| set-content "$PWD/.vmbrc"
+          $vmbrc | ConvertTo-Json -depth 32| set-content "$PWD/.vmbrc"
 
       - name: Test VMB
         run: |
