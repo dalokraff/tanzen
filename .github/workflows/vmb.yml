@@ -104,17 +104,17 @@ jobs:
       - name: Build Mod
         run: .\vmb.exe build ${{ vars.MOD_NAME }} --verbose
 
-       # Uploads Mod
-      - name: Upload Mod
-        run: .\vmb.exe upload ${{ vars.MOD_NAME }} --verbose
-
+      #  # Uploads Mod
       # - name: Upload Mod
-      #   run: |
-      #     # $ugc_path = ".\'steamapps\common\Vermintide 2 SDK\ugc_uploader\ugc_tool.exe'"
-      #     # $ugc_cmd = "$ugc_path -c mods/${{ vars.MOD_NAME }}/itemV2.cfg"
-      #     # Invoke-Expression $ugc_cmd
-      #     '${{ vars.WORKSHOP_VDF }}' > "$PWD/item.vdf"
-      #     .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +workshop_build_item "$PWD/item.vdf" +quit || true
+      #   run: .\vmb.exe upload ${{ vars.MOD_NAME }} --verbose
+
+      - name: Upload Mod
+        run: |
+          $ugc_path = ".\'steamapps\common\Vermintide 2 SDK\ugc_uploader\ugc_tool.exe'"
+          $ugc_cmd = "$ugc_path -c mods/${{ vars.MOD_NAME }}/itemV2.cfg"
+          Invoke-Expression $ugc_cmd
+          # '${{ vars.WORKSHOP_VDF }}' > "$PWD/item.vdf"
+          # .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +workshop_build_item "$PWD/item.vdf" +quit || true
 
 
       # - name: Archive steam logs
