@@ -112,8 +112,12 @@ jobs:
           '${{ vars.WORKSHOP_VDF }}' > "$PWD/item.vdf"
           .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +workshop_build_item "$PWD/item.vdf" +quit || true
 
-      - name: Check Err
-        run: cat "D:\a\tanzen\tanzen\logs\stderr.txt"
+      - name: Archive steam logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: stderr
+          path: logs/*
+          retention-days: 1
 
       # - name: Release
       #   if: contains(fromJSON('["push"]'), github.event_name)
