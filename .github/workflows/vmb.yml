@@ -116,7 +116,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: stderr
-          path: logs/*
+          path: workshopbuilds/*
           retention-days: 1
 
       # - name: Release
