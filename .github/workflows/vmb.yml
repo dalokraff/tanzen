@@ -110,7 +110,7 @@ jobs:
           # $ugc_cmd = "$ugc_path -c mods/${{ vars.MOD_NAME }}/itemV2.cfg"
           # Invoke-Expression $ugc_cmd
           '${{ vars.WORKSHOP_VDF }}' > "$PWD/item.vdf"
-          .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +workshop_build_item "$PWD/item.vdf" +quit
+          .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +workshop_build_item "$PWD/item.vdf" +quit || true
 
       - name: Check Err
         run: cat "D:\a\tanzen\tanzen\logs\stderr.txt"
