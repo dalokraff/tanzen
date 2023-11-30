@@ -111,7 +111,9 @@ jobs:
           # Invoke-Expression $ugc_cmd
           '${{ vars.WORKSHOP_VDF }}' > "$PWD/item.vdf"
           .\steamcmd +login "${{ secrets.STEAM_USER }}" "${{ secrets.STEAM_PASSWORD }}" +workshop_build_item "$PWD/item.vdf" +quit
-          cat "D:\a\tanzen\tanzen\logs\stderr.txt"
+
+      - name: Check Err
+        run: cat "D:\a\tanzen\tanzen\logs\stderr.txt"
 
       # - name: Release
       #   if: contains(fromJSON('["push"]'), github.event_name)
